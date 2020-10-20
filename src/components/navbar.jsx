@@ -101,7 +101,6 @@ class Navbar extends Component {
         <nav className="navbar navbar-expand-lg nav">
           <div
             className={`collapse navbar-collapse ${this.state.showDropdown}`}
-            id="navbarSupportedContent"
           >
             <ul className="navbar-nav">
               <div className="clearfix d-block d-sm-none">&nbsp;</div>
