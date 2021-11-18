@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 // eslint-disable-next-line
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Routes, Router, Route, Link } from "react-router-dom";
 
 import Homepage from "../pages/homepage";
 import About from "../pages/about";
@@ -163,6 +163,7 @@ class Navbar extends Component {
         </nav>
         <div className="clearfix d-block d-sm-none">&nbsp;</div>
         <ViewCart />
+
         <Route exact path="/" component={Homepage} />
         <Route path="/about" component={About} />
         <Route path="/contact" component={Contact} />
@@ -171,6 +172,7 @@ class Navbar extends Component {
         <Route path="/login" component={Login} />
         <Route path="/admin" component={Admin} />
         <Route path="/add-product" component={AddProduct} />
+
       </div>
     );
   }

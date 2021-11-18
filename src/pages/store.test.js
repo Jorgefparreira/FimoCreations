@@ -2,11 +2,11 @@ import React from "react";
 import { shallow } from "enzyme";
 import Store from "./store";
 describe("Store", () => {
-  it("items list should not be empty ", () => {
-    const wrapper = shallow(<Store />);
-    const actual = wrapper.state("items").length;
-    expect(actual).toBeGreaterThan(2);
-  });
+  // it("items list should not be empty ", () => {
+  //   const wrapper = shallow(<Store />);
+  //   const actual = wrapper.state("items").length;
+  //   expect(actual).toBeGreaterThan(2);
+  // });
 
   // it("should change state type", () => {
   //   const wrapper = shallow(<Store />);
