@@ -44,6 +44,11 @@ h4 {
   margin-bottom: 5px;
 }
 
+.active-btn {
+  background-color: #21a6bb;
+  color: #fff;
+}
+
 .checkbox input {
   margin-left: 0 !important;
 }
@@ -270,7 +275,7 @@ h4 {
 .view-cart-btn {
   padding: 5px 7px 5px 5px !important;
   float: right;
-  margin: -50px 10px;
+  // margin: -50px 10px;
   position: relative;
   z-index: 5;
   color: #17a2b8;
@@ -304,13 +309,21 @@ h4 {
   right: 0;
   top: 0;
   background: #fff;
-  z-index: 9999;
+  z-index: 10000;
   height: 100%;
   width: 300px;
   overflow-y: scroll;
   opacity: 1;
   transition: 500ms;
   transform: translateX(300px);
+
+  .close {
+    border: none;
+    background: #fff;
+    text-align: right;
+    width: 100%;
+    font-size: 21px;
+  }
 
   .view-cart-delete {
     float: right;
@@ -353,7 +366,7 @@ h4 {
 //homepage
 
 #homepagesvg {
-  position: absolute;
+  // position: absolute;
   z-index: -1;
   width: 100%;
   right: 0;
@@ -375,7 +388,7 @@ h4 {
 #homepage-store-btn {
   position: absolute;
   left: calc(50% - 110px);
-  top: 200px;
+  top: calc(56% - 36px);
   opacity: 0;
   color: #fff;
   font-size: 35px;
@@ -397,6 +410,18 @@ h4 {
 #contact {
   button {
     padding: 6px 13px;
+  }
+
+  label {
+    display: none;
+  }
+
+  input, textarea{
+    margin-bottom: 20px;
+  }
+
+  .side-img{
+    margin-bottom: 20px;
   }
 
   .alert {
@@ -434,17 +459,11 @@ h4 {
   }
 }
 
-// events
-
-#events{
-  .reading_con img {
-    height: 200px;
+@media(min-width:768px){
+  #contact .side-img{
+    padding: 0 15px;
   }
-
-  .short-container {
-    overflow: hidden;
-  }
-} 
+}
 
 //admin
 
@@ -508,8 +527,3 @@ footer {
   }
 }
 
-@media (min-width: 576px) {
-  #copyright p {
-    float: right;
-  }
-}

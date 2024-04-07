@@ -1,17 +1,17 @@
 import React, { Component } from "react";
 // eslint-disable-next-line
-import { BrowserRouter as Routes, Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Routes, Route, Link } from "react-router-dom";
 
 import Homepage from "../pages/homepage";
-import About from "../pages/about";
-import Contact from "../pages/contact";
-import Events from "../pages/events";
-import Store from "../pages/store";
-import Login from "../pages/login";
-import ViewCart from "../components/view_cart";
-import Admin from "../pages/admin";
-import AddProduct from "../pages/add_product";
-import { auth } from "../Firebase";
+// import About from "../pages/about";
+// import Contact from "../pages/contact";
+// import Events from "../pages/events";
+// import Store from "../pages/store";
+// import Login from "../pages/login";
+// import ViewCart from "../components/view_cart";
+// import Admin from "../pages/admin";
+// import AddProduct from "../pages/add_product";
+// import { auth } from "../Firebase";
 
 class Navbar extends Component {
   constructor() {
@@ -27,15 +27,15 @@ class Navbar extends Component {
   }
 
   componentDidMount() {
-    auth.onAuthStateChanged(user => {
-      if (user) {
-        if (user.email === process.env.REACT_APP_EMAIL) {
-          this.setState({ admin: true });
-        }
-      }
-    });
-    const height = window.innerHeight - 61 + "px";
-    this.setState({ minHeight: height });
+    // auth.onAuthStateChanged(user => {
+    //   if (user) {
+    //     if (user.email === process.env.REACT_APP_EMAIL) {
+    //       this.setState({ admin: true });
+    //     }
+    //   }
+    // });
+    // const height = window.innerHeight - 61 + "px";
+    // this.setState({ minHeight: height });
     window.addEventListener("resize", this.handleWindowSizeChange);
     window.addEventListener("load", this.handleLoad);
   }
@@ -52,7 +52,7 @@ class Navbar extends Component {
         iconBar2: "hamburgerAni-icon-bar2"
       });
       setTimeout(
-        function() {
+        function () {
           this.setState({ iconBar1: "", iconBar2: "" });
         }.bind(this),
         1000
@@ -60,17 +60,17 @@ class Navbar extends Component {
       this.setState(
         this.state.showDropdown === ""
           ? {
-              showDropdown: "nav-dropdown-show",
-              titleDropdown: "main-title-menu",
-              hamburgerDropdown: "hamburder-dropdown"
-            }
+            showDropdown: "nav-dropdown-show",
+            titleDropdown: "main-title-menu",
+            hamburgerDropdown: "hamburder-dropdown"
+          }
           : { showDropdown: "", titleDropdown: "", hamburgerDropdown: "" }
       );
     }
   }
 
   componentWillUnmount() {
-    window.removeEventListener("resize", this.handleWindowSizeChange);  
+    window.removeEventListener("resize", this.handleWindowSizeChange);
   }
 
   handleWindowSizeChange = () => {
@@ -80,15 +80,15 @@ class Navbar extends Component {
   render() {
     return (
       <div id="main-container" style={{ minHeight: this.state.minHeight }}>
-        <div>
+        {/* <div>
           <Link className="login-link" to="/login" />
-        </div>
+        </div> */}
         <button
           className={`navbar-toggler ${this.state.hamburgerDropdown}`}
           type="button"
           onClick={() => this.handleClick()}
         >
-          <span className="sr-only">Toggle navigation</span>
+          {/* <span className="sr-only">Toggle navigation</span> */}
           <div className="hamburger-wrapper ">
             <span className={`icon-bar icon-bar1 ${this.state.iconBar1}`} />
             <span className={`icon-bar icon-bar2 ${this.state.iconBar2}`} />
@@ -98,6 +98,24 @@ class Navbar extends Component {
         <h1 className={`main-title ${this.state.titleDropdown}`}>
           Lil Fimo Creations
         </h1>
+        {/* <nav className="navbar navbar-expand-lg bg-body-tertiary">
+          <div className="container-fluid">
+            <a className="navbar-brand" href="#">Navbar</a>
+            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span className="navbar-toggler-icon"></span>
+            </button>
+            <div className="collapse navbar-collapse" id="navbarNav">
+              <ul className="navbar-nav">
+                <li className="nav-item">
+                  <a className="nav-link active" aria-current="page" href="#">Home</a>
+                </li>
+                <li className="nav-item">
+                  <a className="nav-link" href="#">Features</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </nav> */}
         <nav className="navbar navbar-expand-lg nav">
           <div
             className={`collapse navbar-collapse ${this.state.showDropdown}`}
@@ -111,15 +129,6 @@ class Navbar extends Component {
                   onClick={() => this.handleClick()}
                 >
                   Home
-                </Link>
-              </li>
-              <li className="nav-item">
-                <Link
-                  className="nav-link"
-                  to="/about"
-                  onClick={() => this.handleClick()}
-                >
-                  About
                 </Link>
               </li>
               <li className="nav-item">
@@ -140,15 +149,6 @@ class Navbar extends Component {
                   Store
                 </Link>
               </li>
-              <li className="nav-item">
-                <Link
-                  className="nav-link"
-                  to="/events"
-                  onClick={() => this.handleClick()}
-                >
-                  Events
-                </Link>
-              </li>
               {this.state.admin ? (
                 <li className="nav-item">
                   <Link className="nav-link" to="/admin">
@@ -161,17 +161,17 @@ class Navbar extends Component {
             </ul>
           </div>
         </nav>
-        <div className="clearfix d-block d-sm-none">&nbsp;</div>
-        <ViewCart />
-
-        <Route exact path="/" component={Homepage} />
-        <Route path="/about" component={About} />
+        {/* <ViewCart /> */}
+        {/* <Routes> */}
+        {/* <Route exact path="/" element={Homepage} /> */}
+        {/* <Route path="/about" component={About} />
         <Route path="/contact" component={Contact} />
         <Route path="/events" component={Events} />
         <Route path="/store" component={Store} />
         <Route path="/login" component={Login} />
         <Route path="/admin" component={Admin} />
-        <Route path="/add-product" component={AddProduct} />
+        <Route path="/add-product" component={AddProduct} /> */}
+        {/* </Routes> */}
 
       </div>
     );

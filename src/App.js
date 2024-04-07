@@ -1,16 +1,28 @@
 import React, { Component } from "react";
-import { BrowserRouter as Router } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
+import { BrowserRouter, Routes, Route, Router } from "react-router-dom";
+import "./styles/lib/bootstrap.css";
 import "./styles/App.scss";
 import MainView from "./components/main_view";
+import Homepage from "./pages/homepage";
+import Store from "./pages/store";
+import Contact from "./pages/contact";
+import Keyring from "./pages/product_page";
+
 
 class App extends Component {
   render() {
     return (
       <div className="App">
-        <Router>
-          <MainView />
-        </Router>{" "}
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<MainView />}>
+              <Route index element={<Homepage />} />
+              <Route path="/contact" element={<Contact/>} />
+              <Route path="/store" element={<Store/>} />
+              <Route path={`/store/:keyringId`} element={<Keyring/>} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
       </div>
     );
   }

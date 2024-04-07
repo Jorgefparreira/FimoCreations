@@ -1,26 +1,44 @@
 import React, { Component } from "react";
-// eslint-disable-next-line
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { collection, getDocs,query, where } from "firebase/firestore";
+import { db } from '../Firebase';
 // import BackButton from "../components/back_button";
 import { Slide, RightArrow, LeftArrow } from "../components/slider";
 import { store, addToCart } from "../components/cart_functions";
-import { firebase } from "../Firebase";
-import MetaTags from "react-meta-tags";
+// import MetaTags from "react-meta-tags";
 import CHECK from "../assets/svg/check";
 
 class Keyring extends Component {
   constructor(props) {
     super(props);
-    this.ref = firebase.firestore().collection("items");
     this.unsubscribe = null;
     this.state = {
-      items: [],
+      item: {},
       currentIndex: 0,
       translateValue: 0,
       addCartText: "Add to Cart",
       addCartTick: 'none'
     };
-    this.match = props.match.params.keyringId;
+    // this.match = props.match.params.keyringId;
+  }
+
+  fetchItems = async () => {
+    let keyring = {};
+    let link = window.location.pathname.replace('/store/', '');
+    const q = query(collection(db, 'items'),
+      where('id', '==', link));
+    const snap = await getDocs(q);
+    if (snap) {
+      snap.forEach((doc) => {
+        keyring = {
+          ...doc.data()
+        }
+      })
+      console.log(keyring)
+    }
+    this.setState({
+      item: keyring
+    });
   }
 
   goToPrevSlide = () => {
@@ -33,7 +51,7 @@ class Keyring extends Component {
   };
 
   goToNextSlide = () => {
-    if (this.state.currentIndex === this.state.items.images.length - 1) {
+    if (this.state.currentIndex === this.state.item?.images.length - 1) {
       return this.setState({
         currentIndex: 0,
         translateValue: 0
@@ -49,49 +67,29 @@ class Keyring extends Component {
     return document.querySelector(".slide").clientWidth;
   };
 
-  onCollectionUpdate = querySnapshot => {
-    const items = [];
-    querySnapshot.forEach(doc => {
-      const { name, description, price, id, images, type } = doc.data();
-      items.push({
-        key: doc.id,
-        id,
-        doc,
-        name,
-        images,
-        type,
-        description,
-        price
-      });
-    });
-    this.item = items.find(({ id }) => id === this.match);
-    this.setState({
-      items: this.item
-    });
-  };
-
   addCart(name, price, image) {
     store.dispatch(addToCart(name, 1, price, image));
     this.setState({ addCartText: "Added ", addCartTick: 'inline-block' });
   }
 
   componentDidMount() {
-    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
+    this.fetchItems()
   }
 
-  render() {  
+  render() {
     return (
       <section>
         <div className="product-view-container z-depth-3">
-          {this.state.items.images ? (
+          {this.state.item?.images ? (
             <div className="container">
-              <MetaTags>
-                <title>{this.state.items.name} || Lil Fimo Creations</title>
+
+              {/* <MetaTags>
+                <title>{this.state.item?.name} || Lil Fimo Creations</title>
                 <meta
                   name="description"
                   content="Have a look here at where Fimo Creations is going to be in the coming months"
                 />
-              </MetaTags>
+              </MetaTags> */}
               <div className="row">
                 <div className="col-md-6 slider-col">
                   <div className="slider">
@@ -102,11 +100,11 @@ class Keyring extends Component {
                         transition: "transform ease-out 0.45s"
                       }}
                     >
-                      {this.state.items.images.map((image, i) => (
+                      {this.state.item?.images.map((image, i) => (
                         <Slide key={i} image={image} />
                       ))}
                     </div>
-                    {this.state.items.images.length > 1 ? (
+                    {this.state.item?.images.length > 1 ? (
                       <div id="slider-arrows">
                         <LeftArrow goToPrevSlide={this.goToPrevSlide} />
                         <RightArrow goToNextSlide={this.goToNextSlide} />
@@ -117,17 +115,17 @@ class Keyring extends Component {
                   </div>
                 </div>
                 <div className="col-md-6">
-                  <h2 className="h3">{this.state.items.name}</h2>
+                  <h2 className="h3">{this.state.item?.name}</h2>
                   <div className="clearfix">&nbsp;</div>
-                  <p className="inner-product-description"     dangerouslySetInnerHTML={{
-                      __html: this.state.items.description
-                    }}
+                  <p className="inner-product-description" dangerouslySetInnerHTML={{
+                    __html: this.state.item?.description
+                  }}
                   />
                   <div className="clearfix">&nbsp;</div>
                   <p>
                     Price: £{" "}
-                    {this.state.items.price
-                      ? this.state.items.price.toFixed(2)
+                    {this.state.item?.price
+                      ? this.state.item?.price.toFixed(2)
                       : ""}
                   </p>
                   <p
@@ -138,19 +136,19 @@ class Keyring extends Component {
                   </p>
                   <div className="product-bottom-btns">
                     <button
-                      className="btn btn-info d-block add-cart-btn"
+                      className="btn add-cart-btn"
                       onClick={() =>
                         this.addCart(
-                          this.state.items.name,
-                          this.state.items.price,
-                          this.state.items.images
+                          this.state.item?.name,
+                          this.state.item?.price,
+                          this.state.item?.images
                         )
                       }
-                      
+
                     >{this.state.addCartText} <CHECK display={this.state.addCartTick}></CHECK></button>
                     <Link to="/store">
                       <button className="btn btn-default product-back-btn">
-                        Back 
+                        Back
                       </button>
                     </Link>
                   </div>
@@ -161,7 +159,7 @@ class Keyring extends Component {
             ""
           )}
         </div>
-        <Link to="/store"><div className="modal-background"/></Link>
+        <Link to="/store"><div className="modal-background" /></Link>
       </section>
     );
   }

@@ -1,20 +1,21 @@
-import React, { Component } from "react";
-import MetaTags from "react-meta-tags";
-// eslint-disable-next-line
+import React, { Component, useState } from "react";
+// import MetaTags from "react-meta-tags";
+import { collection, getDocs, query } from "firebase/firestore";
+import { db } from '../Firebase';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import Keyring from "./product_view";
-import { firebase } from "../Firebase";
 import "../styles/store.scss";
 import MagGlass from "../assets/svg/mag_glass";
+
 
 function scrollTop() {
   window.scrollTo(0, 0);
 }
 
+
+
 class Store extends Component {
   constructor(props) {
     super(props);
-    this.ref = firebase.firestore().collection("items");
     this.unsubscribe = null;
     this.state = {
       items: [],
@@ -26,33 +27,29 @@ class Store extends Component {
     this.loadMore = this.loadMore.bind(this);
   }
 
-  onCollectionUpdate = querySnapshot => {
-    const items = [];
-    querySnapshot.forEach(doc => {
-      const { name, description, price, id, images, type } = doc.data();
-      items.push({
-        key: doc.id,
-        id,
-        doc, // DocumentSnapshot
-        name,
-        images,
-        type,
-        description,
-        price
-      });
-    });
+  fetchItems = async () => {
+    let keyrings = [];
+    const q = query(collection(db, 'items'));
+    const snap = await getDocs(q);
+    if (snap) {
+      snap.forEach((doc) => {
+        keyrings.push({
+          ...doc.data()
+        })
+      })
+    }
     this.setState({
-      items
+      items: keyrings
     });
-  };
+  }
 
   componentDidMount() {
-    this.unsubscribe = this.ref.onSnapshot(this.onCollectionUpdate);
-
+    this.fetchItems()
   }
 
   searchStore(event) {
-    this.setState({ searchItem: event.target.value.toLowerCase() });
+    let keyword = event.target.value;
+    if (keyword.length > 2 || keyword.length == 0) this.setState({ searchItem: keyword.toLowerCase() });
   }
 
   loadMore() {
@@ -65,20 +62,20 @@ class Store extends Component {
     this.setState({ type: category });
   }
 
-  handleImageLoaded(image){
+  handleImageLoaded(image) {
     image.target.closest(".product-card-container").style.opacity = 1;
   }
 
   render() {
     return (
       <div className="container ">
-        <MetaTags>
+        {/* <MetaTags>
           <title>Store || Lil Fimo Creations</title>
           <meta
             name="description"
             content="Browse through all the Lil Fimo Creations."
           />
-        </MetaTags>
+        </MetaTags> */}
         <nav id="store-nav">
           <div
             className="nav-category"
@@ -132,7 +129,6 @@ class Store extends Component {
                 </div>
               );
             })}
-          <Route path={`/store/:keyringId`} component={Keyring} />
         </div>
         {this.state.visible < this.state.items.length && (
           <button

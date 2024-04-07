@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { store, deleteFromCart } from "./cart_functions";
 import SHOPPINGCART from "../assets/svg/cart";
 import RUBISHBIN from "../assets/svg/rubish_bin";
-import PaypalCheckout from "./paypal_checkout";
+// import PaypalCheckout from "./paypal_checkout";
 
 
 class ViewCart extends Component {
@@ -12,8 +12,8 @@ class ViewCart extends Component {
     this.state = {
       items: [],
       showCart: "",
-      showCartOverlay:""
-    };    
+      showCartOverlay: ""
+    };
   }
   componentDidMount() {
     store.subscribe(() => {
@@ -21,9 +21,9 @@ class ViewCart extends Component {
       this.setState({
         items: viewCart.shoppingCart.cart
       });
-    });   
+    });
   }
-  
+
 
   deleteProduct(name) {
     store.dispatch(deleteFromCart(name));
@@ -33,18 +33,18 @@ class ViewCart extends Component {
     this.setState(
       this.state.showCart === "view-cart-box-show"
         ? {
-            showCart: "",
-            showCartOverlay: ""
-          }
+          showCart: "",
+          showCartOverlay: ""
+        }
         : {
-            showCart: "view-cart-box-show",
-            showCartOverlay: "show-cart-overlay"
-          }
+          showCart: "view-cart-box-show",
+          showCartOverlay: "show-cart-overlay"
+        }
     );
   }
 
   hideCart = () => {
-    this.setState({showCart: "", showCartOverlay: ""})
+    this.setState({ showCart: "", showCartOverlay: "" })
   }
 
   cartTotal() {
@@ -66,9 +66,9 @@ class ViewCart extends Component {
   removeOne(name, quantity) {
     if (quantity - 1 < 1) {
       this.deleteProduct(name);
-      if(this.state.items.length < 2) {
+      if (this.state.items.length < 2) {
         this.hideCart()
-       }       
+      }
     }
     this.state.items.map((item) => {
       if (item.product === name) {
@@ -82,16 +82,16 @@ class ViewCart extends Component {
     return (
       <section>
         {this.state.items.length > 0 ? (
-          <div
-            className="view-cart-btn"
-            id="view-cart-btn"
-            onClick={this.toggle.bind(this)}
-          >
-            <SHOPPINGCART/> 
-            <div id="cart-length-wrapper">{this.state.items.length}</div>
-            
-          </div>
-          
+        <div
+          className="view-cart-btn"
+          id="view-cart-btn"
+          onClick={this.toggle.bind(this)}
+        >
+          <SHOPPINGCART />
+          <div id="cart-length-wrapper">{this.state.items.length}</div>
+
+        </div>
+
         ) : (
           ""
         )}
@@ -144,7 +144,7 @@ class ViewCart extends Component {
                       className="btn btn-info view-cart-delete"
                       onClick={() => this.deleteProduct(item.product)}
                     >
-                      <RUBISHBIN/>
+                      <RUBISHBIN />
                     </button>
                   </div>
                 </div>
@@ -155,7 +155,7 @@ class ViewCart extends Component {
               <p>Total: £{this.cartTotal().toFixed(2)}</p>
               <div className="paypal-btn">
                 {/* <PaypalCheckout items={this.state.items} total={this.cartTotal()}></PaypalCheckout> */}
-                        
+
               </div>
             </div>
           </div>

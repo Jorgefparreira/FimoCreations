@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import MetaTags from "react-meta-tags";
-import Axios from "axios";
-
+import {  httpsCallable } from "firebase/functions";
+// import MetaTags from "react-meta-tags";
+import { functions } from "../Firebase";
 import PaperPlane from "../assets/svg/paper_plane";
 import ContactPic from "../assets/kawaii_keyrings.jpg";
 
@@ -27,7 +27,8 @@ class Contact extends Component {
     });
   };
 
-  componentDidMount() {}
+  componentDidMount() {
+  }
 
   handleSubmit = e => {
     e.preventDefault();
@@ -37,16 +38,24 @@ class Contact extends Component {
     }
     this.setState({ displayErrors: "" });
 
-    let data = `name=${this.state.name}&phone=${this.state.phone}&email=${      this.state.email}&message=${this.state.message}`;
-    Axios.post('https://us-central1-lilfimokeyrings.cloudfunctions.net/contactMailer', data)
-    .then((response) => {
-      this.setState({
-        displayThanks: "thanks-message"
-      });
-    })    
-    .catch(error => {
-        console.log(error);
-    });    
+    let data = `name=${this.state.name}&phone=${this.state.phone}&email=${this.state.email}&message=${this.state.message}`;
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        console.log("Message Sent");
+        this.setState({
+          displayThanks: "thanks-message"
+        });
+      }
+    };
+    xhttp.open(
+      "POST",
+      "https://us-central1-lilfimokeyrings.cloudfunctions.net/contactMailer",
+      true
+    );
+    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhttp.send(data);
 
     this.setState({
       name: "",
@@ -54,10 +63,6 @@ class Contact extends Component {
       email: "",
       message: ""
     });
-    // ([e.target.name] = ""),
-    //   ([e.target.phone] = ""),
-    //   ([e.target.email] = ""),
-    //   ([e.target.message] = "");
   };
   handleClick = () => {
     this.setState({
@@ -69,14 +74,12 @@ class Contact extends Component {
   render() {
     return (
       <section id="contact">
-        <MetaTags>
+        {/* <MetaTags>
           <title>Contact || Lil Fimo Creations</title>
           <meta name="description" content="Get in touch" />
-        </MetaTags>
+        </MetaTags> */}
         <div className="header">
           <h2 className="text-center h1 contact-title">Contact</h2>
-          <div className="clearfix">&nbsp;</div>
-          <div className="clearfix">&nbsp;</div>
         </div>
         <div className={this.state.displayErrors}>
           <div className="container">
@@ -139,7 +142,6 @@ class Contact extends Component {
                         onChange={this.updateInput}
                         value={this.state.name}
                       />
-                      {/* <p className="required-input">* Required</p> */}
                     </div>
                     <div className="form-group">
                       <label htmlFor="phone" className="sr-only">
@@ -170,7 +172,6 @@ class Contact extends Component {
                         onChange={this.updateInput}
                         value={this.state.email}
                       />
-                      {/* <p className="required-input">* Required</p> */}
                     </div>
                     <label htmlFor="message-box" className="sr-only">
                       Message
@@ -188,12 +189,11 @@ class Contact extends Component {
                       value={this.state.message}
                       data-gramm_editor="false"
                     />
-                    {/* <p className="required-input">* Required</p> */}
-                    <div className="clearfix">&nbsp;</div>
+
                     <button
                       type="submit"
                       value="Send"
-                      className="btn btn-info"
+                      className="btn active-btn"
                       id="submit-button"
                     >
                       <PaperPlane></PaperPlane>&nbsp;
@@ -201,16 +201,13 @@ class Contact extends Component {
                     </button>
                     
                   </form>
-                  <div className="clearfix">&nbsp;</div>
                 </div>
                 <div className="col-sm-12 col-md-6 col-lg-5 ">
                   <img
                     src={ContactPic}
-                    className="img-fluid"
+                    className="img-fluid side-img"
                     alt="Kawaii fimo keyrings"
                   />
-                  <div className="clearfix">&nbsp;</div>
-                  <div className="clearfix">&nbsp;</div>
                 </div>
               </div>
             </div>
