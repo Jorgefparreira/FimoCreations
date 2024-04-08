@@ -20,7 +20,7 @@ body {
 }
 
 p {
-  margin: 10px 0 !important;
+  // margin: 10px 0 !important;
   font-size: 1.2em !important;
 }
 
@@ -504,26 +504,30 @@ footer {
 
   .footer-row {
     margin-bottom: 0;
-  }
-  
-  #twitter-button {
-    margin: 0;
-    width: 200px;
-  }
-  
-  .social-media iframe {
-    height: 25px;
-  }
-  
-  .social-media-link {
-    cursor: pointer;
-    margin: 5px 5px;
-    height: 40px;
-    transition: 500ms;
 
-    &:hover {
-      transform: scale(1.1);
+    p{
+      margin: 4px 0;
     }
   }
+  
+  // #twitter-button {
+  //   margin: 0;
+  //   width: 200px;
+  // }
+  
+  // .social-media iframe {
+  //   height: 25px;
+  // }
+  
+  // .social-media-link {
+  //   cursor: pointer;
+  //   margin: 5px 5px;
+  //   height: 40px;
+  //   transition: 500ms;
+
+  //   &:hover {
+  //     transform: scale(1.1);
+  //   }
+  // }
 }
 

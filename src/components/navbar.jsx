@@ -1,17 +1,6 @@
 import React, { Component } from "react";
-// eslint-disable-next-line
 import { BrowserRouter as Routes, Route, Link } from "react-router-dom";
-
-import Homepage from "../pages/homepage";
-// import About from "../pages/about";
-// import Contact from "../pages/contact";
-// import Events from "../pages/events";
-// import Store from "../pages/store";
-// import Login from "../pages/login";
-// import ViewCart from "../components/view_cart";
-// import Admin from "../pages/admin";
-// import AddProduct from "../pages/add_product";
-// import { auth } from "../Firebase";
+import { auth } from "../Firebase";
 
 class Navbar extends Component {
   constructor() {
@@ -21,29 +10,25 @@ class Navbar extends Component {
       width: window.innerWidth,
       showDropdown: "",
       titleDropdown: "",
-      hamburgerDropdown: "",
-      minHeight: 0
+      hamburgerDropdown: ""
     };
   }
 
   componentDidMount() {
-    // auth.onAuthStateChanged(user => {
-    //   if (user) {
-    //     if (user.email === process.env.REACT_APP_EMAIL) {
-    //       this.setState({ admin: true });
-    //     }
-    //   }
-    // });
-    // const height = window.innerHeight - 61 + "px";
-    // this.setState({ minHeight: height });
+    auth.onAuthStateChanged(user => {
+      if (user) {
+        if (user.auth.email === process.env.REACT_APP_ADMIN_EMAIL) {
+          this.setState({ admin: true });
+        }
+      }
+    });
+    this.setState({ width: window.innerWidth });
     window.addEventListener("resize", this.handleWindowSizeChange);
-    window.addEventListener("load", this.handleLoad);
   }
 
-  handleWindowSizeChange = () => {
-    const height = window.innerHeight - 61 + "px";
-    this.setState({ minHeight: height });
-  };
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.handleWindowSizeChange);
+  }
 
   handleClick() {
     if (this.state.width < 992) {
@@ -69,26 +54,18 @@ class Navbar extends Component {
     }
   }
 
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.handleWindowSizeChange);
-  }
-
   handleWindowSizeChange = () => {
     this.setState({ width: window.innerWidth });
   };
 
   render() {
     return (
-      <div id="main-container" style={{ minHeight: this.state.minHeight }}>
-        {/* <div>
-          <Link className="login-link" to="/login" />
-        </div> */}
+      <section id="top-navbar" >
         <button
           className={`navbar-toggler ${this.state.hamburgerDropdown}`}
           type="button"
           onClick={() => this.handleClick()}
         >
-          {/* <span className="sr-only">Toggle navigation</span> */}
           <div className="hamburger-wrapper ">
             <span className={`icon-bar icon-bar1 ${this.state.iconBar1}`} />
             <span className={`icon-bar icon-bar2 ${this.state.iconBar2}`} />
@@ -98,24 +75,6 @@ class Navbar extends Component {
         <h1 className={`main-title ${this.state.titleDropdown}`}>
           Lil Fimo Creations
         </h1>
-        {/* <nav className="navbar navbar-expand-lg bg-body-tertiary">
-          <div className="container-fluid">
-            <a className="navbar-brand" href="#">Navbar</a>
-            <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-              <span className="navbar-toggler-icon"></span>
-            </button>
-            <div className="collapse navbar-collapse" id="navbarNav">
-              <ul className="navbar-nav">
-                <li className="nav-item">
-                  <a className="nav-link active" aria-current="page" href="#">Home</a>
-                </li>
-                <li className="nav-item">
-                  <a className="nav-link" href="#">Features</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-        </nav> */}
         <nav className="navbar navbar-expand-lg nav">
           <div
             className={`collapse navbar-collapse ${this.state.showDropdown}`}
@@ -149,31 +108,16 @@ class Navbar extends Component {
                   Store
                 </Link>
               </li>
-              {this.state.admin ? (
+              {this.state.admin &&
                 <li className="nav-item">
                   <Link className="nav-link" to="/admin">
                     Admin
                   </Link>
-                </li>
-              ) : (
-                ""
-              )}
+                </li>}
             </ul>
           </div>
         </nav>
-        {/* <ViewCart /> */}
-        {/* <Routes> */}
-        {/* <Route exact path="/" element={Homepage} /> */}
-        {/* <Route path="/about" component={About} />
-        <Route path="/contact" component={Contact} />
-        <Route path="/events" component={Events} />
-        <Route path="/store" component={Store} />
-        <Route path="/login" component={Login} />
-        <Route path="/admin" component={Admin} />
-        <Route path="/add-product" component={AddProduct} /> */}
-        {/* </Routes> */}
-
-      </div>
+      </section>
     );
   }
 }

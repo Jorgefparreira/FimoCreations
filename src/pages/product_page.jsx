@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import { collection, getDocs,query, where } from "firebase/firestore";
+import { collection, getDocs, query, where } from "firebase/firestore";
 import { db } from '../Firebase';
 // import BackButton from "../components/back_button";
 import { Slide, RightArrow, LeftArrow } from "../components/slider";
@@ -80,16 +80,16 @@ class Keyring extends Component {
     return (
       <section>
         <div className="product-view-container z-depth-3">
-          {this.state.item?.images ? (
+          {this.state.item?.images &&
             <div className="container">
 
               {/* <MetaTags>
-                <title>{this.state.item?.name} || Lil Fimo Creations</title>
-                <meta
-                  name="description"
-                  content="Have a look here at where Fimo Creations is going to be in the coming months"
-                />
-              </MetaTags> */}
+                        <title>{this.state.item?.name} || Lil Fimo Creations</title>
+                        <meta
+                          name="description"
+                          content="Have a look here at where Fimo Creations is going to be in the coming months"
+                        />
+                      </MetaTags> */}
               <div className="row">
                 <div className="col-md-6 slider-col">
                   <div className="slider">
@@ -154,10 +154,7 @@ class Keyring extends Component {
                   </div>
                 </div>
               </div>
-            </div>
-          ) : (
-            ""
-          )}
+            </div>}
         </div>
         <Link to="/store"><div className="modal-background" /></Link>
       </section>

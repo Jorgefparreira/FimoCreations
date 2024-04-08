@@ -81,20 +81,14 @@ class ViewCart extends Component {
   render() {
     return (
       <section>
-        {this.state.items.length > 0 ? (
-        <div
+        {this.state.items.length > 0 && <div
           className="view-cart-btn"
           id="view-cart-btn"
           onClick={this.toggle.bind(this)}
         >
           <SHOPPINGCART />
           <div id="cart-length-wrapper">{this.state.items.length}</div>
-
-        </div>
-
-        ) : (
-          ""
-        )}
+        </div>}
         <div className={`view-cart-box z-depth-2 ${this.state.showCart}`}>
           <div className="container">
             <button
