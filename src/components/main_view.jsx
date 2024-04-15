@@ -13,6 +13,11 @@ class MainView extends Component {
   }
 
   componentDidMount() {
+    console.log(
+      "%cDeveloped by Web Archaeologist www.web-archaeologist.co.uk",
+      "background: #4f3215; color: #fff; width: 100%; padding: 5px;"
+    );
+
     this.setMinHeight()
 
     window.addEventListener("resize", this.handleWindowSizeChange);

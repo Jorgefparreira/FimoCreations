@@ -134,7 +134,7 @@ class Store extends Component {
           <button
             onClick={this.loadMore}
             type="button"
-            className="btn btn-info load-more mx-auto d-block"
+            className="btn active-btn load-more mx-auto d-block"
           >
             Load more
           </button>

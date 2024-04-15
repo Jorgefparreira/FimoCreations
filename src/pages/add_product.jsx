@@ -53,10 +53,8 @@ class AddProduct extends React.Component {
       const uploadImage = await uploadBytesResumable(imageRef, this.file.files[0]);
       const publicImageUrl = await getDownloadURL(imageRef);
 
-      const collectionRef = collection(db, 'items');
-
       try {
-        const docRef = await addDoc(collectionRef, {
+        const docRef = await addDoc(collection(db, 'items'), {
           id: this.state.id,
           name: this.state.name,
           images: [publicImageUrl],
@@ -83,87 +81,90 @@ class AddProduct extends React.Component {
 
   render() {
     return (
-      <div className="container">
-        <div className="row">
-          <div className="col-sm-12 col-md-6">
-            <form onSubmit={this.addProduct} id="add-product-form">
-              <div className="form-group">
-                <input
-                  type="text"
-                  name="id"
-                  placeholder="ID"
-                  onChange={this.updateInput}
-                  value={this.state.id}
-                  className="form-control"
-                  autoComplete="off"
-                  required
-                />
-              </div>
+      <section id="add-product">
+        <div className="container">
+          <div className="row">
+            <div className="col-sm-12 col-md-6">
+              <form onSubmit={this.addProduct} id="add-product-form">
+                <div className="form-group">
+                  <input
+                    type="text"
+                    name="id"
+                    placeholder="ID"
+                    onChange={this.updateInput}
+                    value={this.state.id}
+                    className="form-control"
+                    autoComplete="off"
+                    required
+                  />
+                </div>
 
-              <div className="form-group">
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Name"
-                  onChange={this.updateInput}
-                  value={this.state.name}
-                  className="form-control"
-                  autoComplete="off"
-                  required
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="upload-img1-btn" className="upload-img-label btn btn-success">
-                  <input id="upload-img1-btn" type="file" className="upload-img-btn" ref={this.setRef} onChange={this.uploadImage} />
-                  Img Choose File
-                </label> &nbsp;&nbsp;
-                <p>{this.state.imageName}</p>
-              </div>
+                <div className="form-group">
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Name"
+                    onChange={this.updateInput}
+                    value={this.state.name}
+                    className="form-control"
+                    autoComplete="off"
+                    required
+                  />
+                </div>
+                <div className="form-group">
+                  <label htmlFor="upload-img1-btn" className="upload-img-label btn btn-success">
+                    <input id="upload-img1-btn" type="file" className="upload-img-btn" ref={this.setRef} onChange={this.uploadImage} />
+                    Img Choose File
+                  </label> &nbsp;&nbsp;
+                  <p>{this.state.imageName}</p>
+                </div>
 
-              <div className="form-group">
-                <input
-                  type="text"
-                  name="description"
-                  placeholder="Description"
-                  onChange={this.updateInput}
-                  value={this.state.description}
-                  className="form-control"
-                  autoComplete="off"
-                  required
-                />
-              </div>
+                <div className="form-group">
+                  <input
+                    type="text"
+                    name="description"
+                    placeholder="Description"
+                    onChange={this.updateInput}
+                    value={this.state.description}
+                    className="form-control"
+                    autoComplete="off"
+                    required
+                  />
+                </div>
 
-              <div className="form-group">
-                <input
-                  type="number"
-                  name="price"
-                  placeholder="Price"
-                  onChange={this.updateInput}
-                  value={this.state.price}
-                  className="form-control"
-                  required
-                />
-              </div>
+                <div className="form-group">
+                  <input
+                    type="number"
+                    name="price"
+                    placeholder="Price"
+                    onChange={this.updateInput}
+                    value={this.state.price}
+                    className="form-control"
+                    required
+                  />
+                </div>
 
-              <div className="form-group">
-                <input
-                  type="text"
-                  name="type"
-                  placeholder="Type"
-                  onChange={this.updateInput}
-                  value={this.state.type}
-                  className="form-control"
-                  required
-                />
-              </div>
+                <div className="form-group">
+                  <input
+                    type="text"
+                    name="type"
+                    placeholder="Type"
+                    onChange={this.updateInput}
+                    value={this.state.type}
+                    className="form-control"
+                    required
+                  />
+                </div>
 
-              <button className="btn btn-info" type="submit">
-                Submit
-              </button>
-            </form>
+                <button className="btn active-btn" type="submit">
+                  Submit
+                </button>
+              </form>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
+
     );
   }
 }

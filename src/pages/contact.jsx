@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import {  httpsCallable } from "firebase/functions";
 // import MetaTags from "react-meta-tags";
-import { functions } from "../Firebase";
 import PaperPlane from "../assets/svg/paper_plane";
 import ContactPic from "../assets/kawaii_keyrings.jpg";
 
@@ -38,32 +36,34 @@ class Contact extends Component {
     }
     this.setState({ displayErrors: "" });
 
-    let data = `name=${this.state.name}&phone=${this.state.phone}&email=${this.state.email}&message=${this.state.message}`;
 
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function () {
-      if (this.readyState == 4 && this.status == 200) {
-        console.log("Message Sent");
-        this.setState({
-          displayThanks: "thanks-message"
-        });
-      }
-    };
-    xhttp.open(
-      "POST",
-      "https://us-central1-lilfimokeyrings.cloudfunctions.net/contactMailer",
-      true
-    );
-    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send(data);
-
-    this.setState({
-      name: "",
-      phone: "",
-      email: "",
-      message: ""
-    });
+    fetch(process.env.REACT_APP_FUNCTION_CONTACT_MAILER_ADDRESS, {
+      method: "post",
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: this.state.name,
+        email: this.state.email,
+        phone: this.state.phone,
+        message: this.state.message
+      })
+    })
+      .then((response) => {
+        if(response?.ok){
+          this.setState({
+            name: "",
+            phone: "",
+            email: "",
+            message: ""
+          });
+        } else {
+          console.error('error')
+        }
+      });
   };
+
   handleClick = () => {
     this.setState({
       displayThanks: "",

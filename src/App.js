@@ -13,6 +13,7 @@ import AddProduct from "./pages/add_product";
 
 
 class App extends Component {
+  
   render() {
     return (
       <div className="App">

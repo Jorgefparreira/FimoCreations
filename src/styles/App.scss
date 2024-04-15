@@ -45,8 +45,19 @@ h4 {
 }
 
 .active-btn {
+  transition: 400ms;
   background-color: #21a6bb;
   color: #fff;
+}
+
+.active-btn:hover{
+  background-color: #3391a0;
+  color: #fff;
+}
+
+#contact input, #contact textarea,
+#add-product input, #add-product textarea{
+  margin-bottom: 20px;
 }
 
 .checkbox input {
@@ -414,10 +425,6 @@ h4 {
 
   label {
     display: none;
-  }
-
-  input, textarea{
-    margin-bottom: 20px;
   }
 
   .side-img{

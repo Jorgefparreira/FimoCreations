@@ -11,7 +11,7 @@ class Admin extends Component {
           </div>
           <div className="col-3">
             <Link
-              className="nav-link btn btn-info d-block mx-auto"
+              className="btn active-btn d-block mx-auto"
               to="/add-product"
             >
               Add Product

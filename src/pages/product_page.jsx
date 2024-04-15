@@ -34,7 +34,6 @@ class Keyring extends Component {
           ...doc.data()
         }
       })
-      console.log(keyring)
     }
     this.setState({
       item: keyring
