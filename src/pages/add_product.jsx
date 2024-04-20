@@ -2,6 +2,7 @@ import React from "react";
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
 import { collection, addDoc } from "firebase/firestore";
 import { db, storage, auth } from "../Firebase";
+import "../styles/add_product.scss";
 class AddProduct extends React.Component {
   constructor() {
     super();

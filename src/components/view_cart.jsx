@@ -3,6 +3,7 @@ import { store, deleteFromCart } from "./cart_functions";
 import SHOPPINGCART from "../assets/svg/cart";
 import RUBISHBIN from "../assets/svg/rubish_bin";
 // import PaypalCheckout from "./paypal_checkout";
+import "../styles/view_cart.scss";
 
 
 class ViewCart extends Component {

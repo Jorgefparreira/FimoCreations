@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter as Routes, Route, Link } from "react-router-dom";
 import { auth } from "../Firebase";
+import "../styles/navbar.scss";
 
 class Navbar extends Component {
   constructor() {

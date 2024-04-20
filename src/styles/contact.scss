@@ -1,0 +1,57 @@
+#contact {
+  button {
+    padding: 6px 13px;
+  }
+
+  label {
+    display: none;
+  }
+
+  .side-img {
+    margin-bottom: 20px;
+    padding: 0 15px
+  }
+
+  .alert {
+    overflow: hidden;
+    transition: 800ms;
+    padding: 0 1.25rem;
+    max-height: 0;
+    border: none;
+  }
+
+  .thanks-message {
+    padding: 0 1.25rem;
+    max-height: 100%;
+    border: 1px solid #c3e6cb;
+  }
+
+  .displayErrors {
+
+    .error-message,
+    .required-input {
+      padding: 0 1.25rem;
+      max-height: 100%;
+      border: 1px solid #f5c6cb;
+    }
+
+    input:invalid,
+    textarea:invalid {
+      border: 2px solid #bf1a25;
+    }
+  }
+
+  .required-input {
+    color: #da3e3e;
+    font-size: 15px !important;
+    margin-top: 3px !important;
+  }
+}
+
+@media(max-width:767px) {
+  #contact .side-img {
+    padding: 0;
+  }
+}
+
+

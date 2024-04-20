@@ -1,9 +1,8 @@
 import React, { Component } from "react";
-// eslint-disable-next-line
-import { BrowserRouter as Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 // import MetaTags from "react-meta-tags";
+import "../styles/homepage.scss";
 import HOMEPAGESVG from "../assets/svg/homepageSVG";
-// import Store from "../pages/store";
 
 class Homepage extends Component {
 
@@ -25,7 +24,6 @@ class Homepage extends Component {
             </div>
           </div>
         </div>
-        {/* <Route path="/store" component={Store} /> */}
       </section>
     );
   }

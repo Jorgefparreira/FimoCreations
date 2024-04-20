@@ -3,8 +3,8 @@ import React, { Component, useState } from "react";
 import { collection, getDocs, query } from "firebase/firestore";
 import { db } from '../Firebase';
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
-import "../styles/store.scss";
 import MagGlass from "../assets/svg/mag_glass";
+import "../styles/store.scss";
 
 
 function scrollTop() {
@@ -48,7 +48,7 @@ class Store extends Component {
   }
 
   searchStore(event) {
-    let keyword = event.target.value;
+    const keyword = event.target.value;
     if (keyword.length > 2 || keyword.length == 0) this.setState({ searchItem: keyword.toLowerCase() });
   }
 
@@ -104,6 +104,7 @@ class Store extends Component {
         <div className="row" id="product-container">
           {this.state.items
             .filter(item => item.type === this.state.type)
+            .filter(item => item.price)
             .filter(item =>
               item.name.toLowerCase().includes(this.state.searchItem)
             )

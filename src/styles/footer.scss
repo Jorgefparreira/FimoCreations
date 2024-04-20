@@ -1,0 +1,15 @@
+footer {
+  position: relative;
+  width: 100%;
+  padding: 10px 0;
+  border-top: 1px solid #888889;
+  background: #fff;
+
+  .footer-row {
+    margin-bottom: 0;
+
+    p {
+      margin: 4px 0;
+    }
+  }
+}

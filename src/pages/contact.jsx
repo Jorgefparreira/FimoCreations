@@ -51,7 +51,7 @@ class Contact extends Component {
       })
     })
       .then((response) => {
-        if(response?.ok){
+        if (response?.ok) {
           this.setState({
             name: "",
             phone: "",
@@ -86,9 +86,8 @@ class Contact extends Component {
             <div className="row">
               <div className="col-12">
                 <div
-                  className={`alert alert-success alert-dismissible fade show ${
-                    this.state.displayThanks
-                  }`}
+                  className={`alert alert-success alert-dismissible fade show ${this.state.displayThanks
+                    }`}
                   role="alert"
                 >
                   <p>Thank you for you message.</p>
@@ -120,95 +119,93 @@ class Contact extends Component {
                 </div>
               </div>
             </div>
-            <div className="row">
-              <div className="xs-reverse">
-                <div className=" col-sm-12 col-md-6 col-lg-7 get-in-touch">
-                  <form
-                    onSubmit={this.handleSubmit}
-                    id="contact-us-form"
-                    noValidate
-                  >
-                    <div className="form-group">
-                      <label htmlFor="name" className="sr-only">
-                        Name
-                      </label>
-                      <input
-                        type="text"
-                        placeholder="Name*"
-                        required
-                        className="form-control"
-                        id="name"
-                        name="name"
-                        onChange={this.updateInput}
-                        value={this.state.name}
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="phone" className="sr-only">
-                        Phone number
-                      </label>
-                      <input
-                        type="tel"
-                        placeholder="Phone number"
-                        pattern="[0-9]{6,}"
-                        className="form-control"
-                        id="phone"
-                        name="phone"
-                        onChange={this.updateInput}
-                        value={this.state.phone}
-                      />
-                    </div>
-                    <div className="form-group">
-                      <label htmlFor="email" className="sr-only">
-                        Email
-                      </label>
-                      <input
-                        type="email"
-                        placeholder="Email*"
-                        required
-                        className="form-control"
-                        id="email"
-                        name="email"
-                        onChange={this.updateInput}
-                        value={this.state.email}
-                      />
-                    </div>
-                    <label htmlFor="message-box" className="sr-only">
-                      Message
+            <div className="row xs-reverse">
+              <div className=" col-sm-12 col-md-6 col-lg-7 get-in-touch">
+                <form
+                  onSubmit={this.handleSubmit}
+                  id="contact-us-form"
+                  noValidate
+                >
+                  <div className="form-group">
+                    <label htmlFor="name" className="sr-only">
+                      Name
                     </label>
-                    <textarea
-                      placeholder="Message*"
-                      cols="40"
-                      rows="5"
-                      minLength="2"
+                    <input
+                      type="text"
+                      placeholder="Name*"
                       required
                       className="form-control"
-                      id="message-box"
-                      name="message"
+                      id="name"
+                      name="name"
                       onChange={this.updateInput}
-                      value={this.state.message}
-                      data-gramm_editor="false"
+                      value={this.state.name}
                     />
-
-                    <button
-                      type="submit"
-                      value="Send"
-                      className="btn active-btn"
-                      id="submit-button"
-                    >
-                      <PaperPlane></PaperPlane>&nbsp;
-                      Submit
-                    </button>
-                    
-                  </form>
-                </div>
-                <div className="col-sm-12 col-md-6 col-lg-5 ">
-                  <img
-                    src={ContactPic}
-                    className="img-fluid side-img"
-                    alt="Kawaii fimo keyrings"
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="phone" className="sr-only">
+                      Phone number
+                    </label>
+                    <input
+                      type="tel"
+                      placeholder="Phone number"
+                      pattern="[0-9]{6,}"
+                      className="form-control"
+                      id="phone"
+                      name="phone"
+                      onChange={this.updateInput}
+                      value={this.state.phone}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <label htmlFor="email" className="sr-only">
+                      Email
+                    </label>
+                    <input
+                      type="email"
+                      placeholder="Email*"
+                      required
+                      className="form-control"
+                      id="email"
+                      name="email"
+                      onChange={this.updateInput}
+                      value={this.state.email}
+                    />
+                  </div>
+                  <label htmlFor="message-box" className="sr-only">
+                    Message
+                  </label>
+                  <textarea
+                    placeholder="Message*"
+                    cols="40"
+                    rows="5"
+                    minLength="2"
+                    required
+                    className="form-control"
+                    id="message-box"
+                    name="message"
+                    onChange={this.updateInput}
+                    value={this.state.message}
+                    data-gramm_editor="false"
                   />
-                </div>
+
+                  <button
+                    type="submit"
+                    value="Send"
+                    className="btn active-btn"
+                    id="submit-button"
+                  >
+                    <PaperPlane></PaperPlane>&nbsp;
+                    Submit
+                  </button>
+
+                </form>
+              </div>
+              <div className="col-sm-12 col-md-6 col-lg-5 ">
+                <img
+                  src={ContactPic}
+                  className="img-fluid side-img"
+                  alt="Kawaii fimo keyrings"
+                />
               </div>
             </div>
           </div>
